@@ -5,22 +5,23 @@
   font-family: 'Press Start 2P', cursive;
 }
 
+header {
+  margin-bottom: 16rem;
+}
+
 body {
   min-width: 350px;
 }
 
 .box {
-  margin: 16rem 0 8rem 0;
-}
-
-#input-section p {
-  font-size: small;
+  margin: 0 0 8rem 0;
 }
 
 #input-section p {
   user-select: none;
   font-size: small;
   text-decoration: underline;
+  margin-top: 6rem;
 }
 
 #input-section p:hover {
@@ -40,10 +41,19 @@ input {
   text-align: start;
 }
 
+#validate {
+  margin-bottom: 8rem;
+}
+
 #validate:hover {
   cursor: pointer;
   background: white;
   color: black;
+}
+
+#alert {
+  line-height: 2rem;
+  font-size: small;
 }
 
 footer {
