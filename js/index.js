@@ -93,14 +93,13 @@ function NewAccount() {
   Create.textContent = 'Login';
   Create.addEventListener('click', Normal, { once: true });
 
-  Email.value = Password.value = '';
-
   UserName = Email.cloneNode(true);
   UserName.type = 'text';
   UserName.id = 'username';
   UserName.placeholder = 'Username';
 
   Email.placeholder = 'E-mail';
+  Email.value = Password.value = '';
 
   Form.firstChild.before(UserName);
 
@@ -136,7 +135,7 @@ function Info(text, delay=2000) {
   Alert.textContent = text;
   Alert.id = 'alert';
   Form.after(Alert);
-  var Interval = setTimeout(function () { Alert.remove() }, delay);
+  setTimeout(function () { Alert.remove() }, delay);
 }
 
 function Normal() {
@@ -144,7 +143,6 @@ function Normal() {
   Create.addEventListener('click', NewAccount, { once: true });
 
   Email.placeholder = 'E-mail or username';
-
   Email.value = Password.value = '';
 
   UserName.remove();
