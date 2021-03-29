@@ -2,7 +2,6 @@ var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
 
-
 var InputSection = document.querySelector("section");
 var Div = document.querySelector("div");
 var Form = document.querySelector("form");
@@ -15,8 +14,7 @@ var Email = document.querySelector("#e-mail");
 var Password = document.querySelector("#password");
 var LoginSuccessfully = document.createElement("h1");
 var UserName = '';
-var Users = {'Carlos': ['caminhãodopinhão@gmail.com', '123456t.']};
-var CurrentEvent = '';
+var Users = {};
 LoginSuccessfully.textContent = 'Login successfully';
 
 Validate.addEventListener('click', Login, { once: true });
@@ -24,7 +22,6 @@ Validate.addEventListener('click', Login, { once: true });
 Create.addEventListener('click', NewAccount, { once: true });
 
 function Login() {
-  Validate.addEventListener('click', Login, { once: true });
   console.log('Validar dados');
 
   var Find = false;
@@ -49,6 +46,8 @@ function Login() {
   console.log(Find);
 
   if (Find) {
+    Validate.addEventListener('click', Login, { once: true });
+
     Form.hidden = true;
 
     InputSection.firstChild.before(LoginSuccessfully);
@@ -56,16 +55,12 @@ function Login() {
     Create.textContent = 'Sign out';
     Create.removeEventListener('click', NewAccount);
     Create.addEventListener('click', SignOut, { once: true });
-    CurrentEvent = '';
   } else {
     Info('Invalid username, e-mail or password', 3000, false);
-  }
+  };
 };
 
 function SignOut() {
-  if (CurrentEvent!='') {
-    console.log(CurrentEvent);
-  };
   Create.removeEventListener('click', Normal);
   Create.addEventListener('click', NewAccount, { once: true });
 
@@ -76,7 +71,7 @@ function SignOut() {
   LoginSuccessfully.remove();
 
   Email.value = Password.value = '';
-}
+};
 
 function EmailValidate(email) {
   if (email!='') {
@@ -99,7 +94,7 @@ function PasswordValidate(password) {
       };
     };
   };
-  return letter>=1 && numbers>=1 && special>=1 ? true : false;
+  return letter >= 1 && numbers >= 1 && special >= 1 ? true : false;
 };
 
 function NewAccount() {
@@ -175,7 +170,6 @@ function AddAccount() {
   } else {
     Info('Invalid e-mail');
   };
-
   console.log('Try add account');
 };
 
@@ -189,7 +183,9 @@ function Info(text, delay=3000, addFunction=true) {
     Alert.remove();
     if (addFunction) {
       Validate.addEventListener('click', AddAccount, { once: true });
-    };
+    } else {
+      Validate.addEventListener('click', Login, { once: true });
+    }
   }, delay);
 };
 
