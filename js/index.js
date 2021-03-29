@@ -13,12 +13,15 @@ var Create = document.querySelector("#create");
 var Validate = document.querySelector("#validate");
 var Email = document.querySelector("#e-mail");
 var Password = document.querySelector("#password");
+var LoginSuccessfully = document.createElement("h1");
 var UserName = '';
-var Users = {};
-
+var Users = {'Carlos': ['caminhãodopinhão@gmail.com', '123456t.']};
+var CurrentEvent = '';
+LoginSuccessfully.textContent = 'Login successfully';
 
 Validate.addEventListener('click', Login, { once: true });
 
+Create.addEventListener('click', NewAccount, { once: true });
 
 function Login() {
   Validate.addEventListener('click', Login, { once: true });
@@ -48,27 +51,32 @@ function Login() {
   if (Find) {
     Form.hidden = true;
 
-    var LoginSuccessfully = document.createElement("h1");
-    LoginSuccessfully.textContent = 'Login successfully';
-
     InputSection.firstChild.before(LoginSuccessfully);
 
     Create.textContent = 'Sign out';
     Create.removeEventListener('click', NewAccount);
-    Create.addEventListener('click', function SignOut() {
-      Create.addEventListener('click', NewAccount, { once: true });
-
-      Create.textContent = 'Create account';
-
-      Form.hidden = false;
-
-      LoginSuccessfully.remove();
-
-      Email.value = Password.value = '';
-    }, { once: true });
+    Create.addEventListener('click', SignOut, { once: true });
+    CurrentEvent = '';
+  } else {
+    Info('Invalid username, e-mail or password', 3000, false);
   }
 };
 
+function SignOut() {
+  if (CurrentEvent!='') {
+    console.log(CurrentEvent);
+  };
+  Create.removeEventListener('click', Normal);
+  Create.addEventListener('click', NewAccount, { once: true });
+
+  Create.textContent = 'Create account';
+
+  Form.hidden = false;
+
+  LoginSuccessfully.remove();
+
+  Email.value = Password.value = '';
+}
 
 function EmailValidate(email) {
   if (email!='') {
@@ -94,11 +102,12 @@ function PasswordValidate(password) {
   return letter>=1 && numbers>=1 && special>=1 ? true : false;
 };
 
-Create.addEventListener('click', NewAccount, { once: true });
-
 function NewAccount() {
-  Create.textContent = 'Login';
   Create.addEventListener('click', Normal, { once: true });
+  Create.textContent = 'Login';
+
+  Email.placeholder = 'E-mail';
+  Email.value = Password.value = '';
 
   UserName = Email.cloneNode(true);
   UserName.type = 'text';
@@ -106,9 +115,6 @@ function NewAccount() {
   UserName.placeholder = 'Username';
 
   Title.textContent = TitlePage.textContent = 'New Account';
-
-  Email.placeholder = 'E-mail';
-  Email.value = Password.value = '';
 
   Form.firstChild.before(UserName);
 
@@ -118,17 +124,51 @@ function NewAccount() {
 };
 
 function AddAccount() {
-  Validate.addEventListener('click', AddAccount, { once: true });
-
   console.log(EmailValidate(Email.value))
+
+  var Account = true;
 
   if (EmailValidate(Email.value)) {
     if (PasswordValidate(Password.value)) {
       if (UserName.value!='') {
+        console.log('ok')
+        for (let key in Users) {
+          if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
+            Info('User already registered');
+            Account = false;
+            break;
+          };
+          if (key == UserName.value) {
+            Info('Existing username');
+            Account = false;
+            break;
+          };
+          if (Users[key].indexOf(Email.value) != -1) {
+            Info('E-mail already registered');
+            Account = false;
+            break;
+          }
+          console.log(key)
+          console.log(UserName.value)
+        };
+        if (Account) {
+          Validate.removeEventListener('click', AddAccount);
+          Validate.addEventListener('click', Login, { once: true });
 
+          Users[UserName.value] = [Email.value, Password.value];
+
+          Form.hidden = true;
+
+          InputSection.firstChild.before(LoginSuccessfully);
+
+          Create.textContent = 'Sign out';
+          Create.removeEventListener('click', NewAccount);
+          Create.addEventListener('click', SignOut, { once: true });
+        };
+        console.log(Users);
       } else {
         Info('Invalid username');
-      }
+      };
     } else {
       Info('Invalid password, must contain 8 characters, special characters, letters and numbers', 5000);
     };
@@ -139,13 +179,19 @@ function AddAccount() {
   console.log('Try add account');
 };
 
-function Info(text, delay=2000) {
+function Info(text, delay=3000, addFunction=true) {
   var Alert = document.createElement("span");
   Alert.textContent = text;
   Alert.id = 'alert';
+  console.log(addFunction)
   Form.after(Alert);
-  setTimeout(function () { Alert.remove() }, delay);
-}
+  setTimeout(function () {
+    Alert.remove();
+    if (addFunction) {
+      Validate.addEventListener('click', AddAccount, { once: true });
+    };
+  }, delay);
+};
 
 function Normal() {
   Create.textContent = 'Create account';
