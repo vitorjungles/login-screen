@@ -3,12 +3,19 @@ year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
 
 
-var InputSection = document.querySelector("section"), Div = document.querySelector("div"), Form = document.querySelector("form"),
-P = document.querySelector("p"), Create = document.querySelector("#create"), Validate = document.querySelector("#validate"),
-Email = document.querySelector("#e-mail"), Password = document.querySelector("#password"), UserName = '';
-
-
+var InputSection = document.querySelector("section");
+var Div = document.querySelector("div");
+var Form = document.querySelector("form");
+var P = document.querySelector("p");
+var Title = document.querySelector("h1");
+var TitlePage = document.querySelector("title");
+var Create = document.querySelector("#create");
+var Validate = document.querySelector("#validate");
+var Email = document.querySelector("#e-mail");
+var Password = document.querySelector("#password");
+var UserName = '';
 var Users = {};
+
 
 Validate.addEventListener('click', Login, { once: true });
 
@@ -98,6 +105,8 @@ function NewAccount() {
   UserName.id = 'username';
   UserName.placeholder = 'Username';
 
+  Title.textContent = TitlePage.textContent = 'New Account';
+
   Email.placeholder = 'E-mail';
   Email.value = Password.value = '';
 
@@ -144,6 +153,8 @@ function Normal() {
 
   Email.placeholder = 'E-mail or username';
   Email.value = Password.value = '';
+
+  Title.textContent = TitlePage.textContent = 'Login';
 
   UserName.remove();
 
