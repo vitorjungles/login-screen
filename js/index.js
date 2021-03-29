@@ -74,10 +74,7 @@ function SignOut() {
 };
 
 function EmailValidate(email) {
-  if (email!='') {
-    return email.split('@').length!=1 && email.split('@')[email.split('@').length-1].indexOf('.')!=-1 && email.split('@')[email.split('@').length-1].split('.')[0]!='' ? true : false;
-  };
-  return false;
+  return email.split('@').length!=1 && email.split('@')[email.split('@').length-1].indexOf('.')!=-1 && email.split('@')[email.split('@').length-1].split('.')[0]!='' ? true : false;
 };
 
 function PasswordValidate(password) {
@@ -132,13 +129,11 @@ function AddAccount() {
             Info('User already registered');
             Account = false;
             break;
-          };
-          if (key == UserName.value) {
+          } else if (key == UserName.value) {
             Info('Existing username');
             Account = false;
             break;
-          };
-          if (Users[key].indexOf(Email.value) != -1) {
+          } else if (Users[key].indexOf(Email.value) != -1) {
             Info('E-mail already registered');
             Account = false;
             break;
