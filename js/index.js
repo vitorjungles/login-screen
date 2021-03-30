@@ -51,7 +51,7 @@ function Login() {
     Create.removeEventListener('click', NewAccount);
     Create.addEventListener('click', SignOut, { once: true });
   } else {
-    Info('Invalid username, e-mail or password', 3000, false);
+    Info('Invalid e-mail, username or password', 3000, false);
   };
 };
 
@@ -69,7 +69,7 @@ function SignOut() {
 };
 
 function EmailValidate(email) {
-  return email.split('@').length!=1 && email.split('@')[email.split('@').length-1].indexOf('.')!=-1 && email.split('@')[email.split('@').length-1].split('.')[0]!='' ? true : false;
+  return email.split('@').length != 1 && email.split('@')[email.split('@').length - 1].indexOf('.') != -1 && email.split('@')[email.split('@').length - 1].split('.')[0] != '' && email.indexOf(' ') == -1 ? true : false;
 };
 
 function PasswordValidate(password) {
@@ -117,7 +117,7 @@ function AddAccount() {
 
   if (EmailValidate(Email.value)) {
     if (PasswordValidate(Password.value)) {
-      if (UserName.value!='') {
+      if (UserName.value!='' && UserName.value.trim().indexOf(' ') == -1) {
         console.log('ok')
         for (let key in Users) {
           if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
@@ -140,7 +140,7 @@ function AddAccount() {
           Validate.removeEventListener('click', AddAccount);
           Validate.addEventListener('click', Login, { once: true });
 
-          Users[UserName.value] = [Email.value, Password.value];
+          Users[UserName.value.trim()] = [Email.value, Password.value];
 
           Form.hidden = true;
 
@@ -175,7 +175,7 @@ function Info(text, delay=3000, addFunction=true) {
       Validate.addEventListener('click', AddAccount, { once: true });
     } else {
       Validate.addEventListener('click', Login, { once: true });
-    }
+    };
   }, delay);
 };
 
