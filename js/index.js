@@ -40,6 +40,8 @@ function Login() {
   };
   console.log(Find);
 
+  Create.removeEventListener('click', NewAccount);
+
   if (Find) {
     Validate.addEventListener('click', Login, { once: true });
 
@@ -48,7 +50,6 @@ function Login() {
     InputSection.firstChild.before(LoginSuccessfully);
 
     Create.textContent = 'Sign out';
-    Create.removeEventListener('click', NewAccount);
     Create.addEventListener('click', SignOut, { once: true });
   } else {
     Info('Invalid e-mail, username or password', 3000, false);
@@ -115,24 +116,29 @@ function AddAccount() {
 
   var Account = true;
 
+  if (!EmailValidate(Email.value) || !PasswordValidate(Password.value) || !(UserName.value!='' && UserName.value.trim().indexOf(' ') == -1)) {
+    Create.removeEventListener('click', Normal);
+  };
+
   if (EmailValidate(Email.value)) {
     if (PasswordValidate(Password.value)) {
       if (UserName.value!='' && UserName.value.trim().indexOf(' ') == -1) {
         console.log('ok')
         for (let key in Users) {
+          if ((key == UserName.value && Users[key].indexOf(Email.value) != -1) || key == UserName.value || Users[key].indexOf(Email.value) != -1) {
+            Create.removeEventListener('click', Normal);
+            Account = false;
+          };
           if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
             Info('User already registered');
-            Account = false;
             break;
           } else if (key == UserName.value) {
             Info('Existing username');
-            Account = false;
             break;
           } else if (Users[key].indexOf(Email.value) != -1) {
             Info('E-mail already registered');
-            Account = false;
             break;
-          }
+          };
           console.log(key)
           console.log(UserName.value)
         };
@@ -173,8 +179,10 @@ function Info(text, delay=3000, addFunction=true) {
     Alert.remove();
     if (addFunction) {
       Validate.addEventListener('click', AddAccount, { once: true });
+      Create.addEventListener('click', Normal, { once: true });
     } else {
       Validate.addEventListener('click', Login, { once: true });
+      Create.addEventListener('click', NewAccount, { once: true });
     };
   }, delay);
 };

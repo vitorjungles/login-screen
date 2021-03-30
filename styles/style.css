@@ -31,13 +31,17 @@ input {
   font-size: small;
   text-decoration: underline;
   margin: auto;
-  margin-top: 6rem;
+  margin-top: 4rem;
   width: fit-content;
 }
 
 #input-section p:hover {
   color: gray;
   cursor: pointer;
+}
+
+#validate {
+  margin-bottom: 4rem;
 }
 
 #validate:hover {
@@ -59,10 +63,6 @@ footer {
   header {
     margin-bottom: 8rem;
     font-size: small;
-  }
-
-  #validate {
-    margin-bottom: 4rem;
   }
 
   #input-section p {
