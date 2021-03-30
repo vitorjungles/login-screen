@@ -26,21 +26,16 @@ function Login() {
 
   var Find = false;
 
-  if (Email.value.indexOf('@') == -1) {
-    console.log('username')
-    for (let key in Users) {
-      if (key == Email.value && Users[key][1] == Password.value) {
-        Find = true;
-        break;
-      };
+  for (let key in Users) {
+    if (key == Email.value && Users[key][1] == Password.value && Email.value.indexOf('@') == -1) {
+      Find = true;
+      console.log('username');
+      break;
     };
-  } else {
-    console.log('E-mail')
-    for (let key in Users) {
-      if (Users[key].indexOf(Email.value)!=-1 && Users[key][1] == Password.value) {
-        Find = true
-        break;
-      };
+    if (Users[key].indexOf(Email.value)!=-1 && Users[key][1] == Password.value && Email.value.indexOf('@') != -1) {
+      Find = true;
+      console.log('e-mail');
+      break;
     };
   };
   console.log(Find);
