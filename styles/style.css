@@ -30,9 +30,12 @@ input::placeholder {
   color: white;
 }
 
+#input-section p, label, #alert {
+  font-size: small;
+}
+
 #input-section p {
   user-select: none;
-  font-size: small;
   text-decoration: underline;
   margin: auto;
   margin-top: 4rem;
@@ -42,10 +45,6 @@ input::placeholder {
 #input-section p:hover {
   color: black;
   cursor: pointer;
-}
-
-label {
-  font-size: small;
 }
 
 #validate {
@@ -60,7 +59,6 @@ label {
 
 #alert {
   line-height: 2rem;
-  font-size: small;
 }
 
 footer {
@@ -77,11 +75,15 @@ a:hover, a:focus {
     font-size: small;
   }
 
-  #validate {
-    margin-bottom: 2rem;
+  #input-section h1 {
+    font-size: large;
   }
 
   #input-section p {
     margin-top: 2rem;
+  }
+
+  #validate {
+    margin-bottom: 2rem;
   }
 }
