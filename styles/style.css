@@ -10,7 +10,7 @@ header {
 }
 
 body {
-  min-width: 350px;
+  min-width: 370px;
 }
 
 .box {
@@ -35,7 +35,6 @@ input::placeholder {
 }
 
 #input-section p {
-  user-select: none;
   text-decoration: underline;
   margin: auto;
   margin-top: 4rem;
