@@ -9,6 +9,7 @@ var P = document.querySelector("p");
 var Title = document.querySelector("h1");
 var TitlePage = document.querySelector("title");
 var Create = document.querySelector("#create");
+var ShowPassword = document.querySelector("#show-password");
 var Validate = document.querySelector("#validate");
 var Email = document.querySelector("#e-mail");
 var Password = document.querySelector("#password");
@@ -21,24 +22,17 @@ Validate.addEventListener('click', Login, { once: true });
 
 Create.addEventListener('click', NewAccount, { once: true });
 
-function Login() {
-  console.log('Validar dados');
+ShowPassword.addEventListener('click', function () { Password.type == 'password' ? Password.type = 'text' : Password.type = 'password' });
 
+function Login() {
   var Find = false;
 
   for (let key in Users) {
-    if (key == Email.value && Users[key][1] == Password.value && Email.value.indexOf('@') == -1) {
+    if ((key == Email.value && Users[key][1] == Password.value && Email.value.indexOf('@') == -1) || (Users[key].indexOf(Email.value)!=-1 && Users[key][1] == Password.value && Email.value.indexOf('@') != -1)) {
       Find = true;
-      console.log('username');
-      break;
-    };
-    if (Users[key].indexOf(Email.value)!=-1 && Users[key][1] == Password.value && Email.value.indexOf('@') != -1) {
-      Find = true;
-      console.log('e-mail');
       break;
     };
   };
-  console.log(Find);
 
   Create.removeEventListener('click', NewAccount);
 
@@ -62,11 +56,12 @@ function SignOut() {
 
   Create.textContent = 'Create account';
 
+  Password.type = 'password';
+
   Form.hidden = false;
+  Form.reset();
 
   LoginSuccessfully.remove();
-
-  Email.value = Password.value = '';
 };
 
 function EmailValidate(email) {
@@ -76,11 +71,11 @@ function EmailValidate(email) {
 function PasswordValidate(password) {
   var numbers = 0, special = 0, letter = 0;
 
-  if (password.length>=8) {
-    for (let c = 0; c<password.length; c++) {
+  if (password.length >= 8) {
+    for (let c = 0; c < password.length; c++) {
       if (!isNaN(password[c])) {
         numbers += 1;
-      } else if (isNaN(password[c]) && 'abcdefghijklmnopqrstuvwxyz'.indexOf(password[c]) != -1) {
+      } else if (isNaN(password[c]) && /[A-Za-z]/.exec(password[c]) != null) {
         letter += 1;
       } else {
         special += 1;
@@ -94,8 +89,9 @@ function NewAccount() {
   Create.addEventListener('click', Normal, { once: true });
   Create.textContent = 'Login';
 
+  Password.type = 'password';
+
   Email.placeholder = 'E-mail';
-  Email.value = Password.value = '';
 
   UserName = Email.cloneNode(true);
   UserName.type = 'text';
@@ -105,6 +101,7 @@ function NewAccount() {
   Title.textContent = TitlePage.textContent = 'New Account';
 
   Form.firstChild.before(UserName);
+  Form.reset();
 
   Validate.value = 'Create';
   Validate.removeEventListener('click', Login);
@@ -112,8 +109,6 @@ function NewAccount() {
 };
 
 function AddAccount() {
-  console.log(EmailValidate(Email.value))
-
   var Account = true;
 
   if (!EmailValidate(Email.value) || !PasswordValidate(Password.value) || !(UserName.value!='' && UserName.value.trim().indexOf(' ') == -1)) {
@@ -123,7 +118,6 @@ function AddAccount() {
   if (EmailValidate(Email.value)) {
     if (PasswordValidate(Password.value)) {
       if (UserName.value!='' && UserName.value.trim().indexOf(' ') == -1) {
-        console.log('ok')
         for (let key in Users) {
           if ((key == UserName.value && Users[key].indexOf(Email.value) != -1) || key == UserName.value || Users[key].indexOf(Email.value) != -1) {
             Create.removeEventListener('click', Normal);
@@ -139,8 +133,6 @@ function AddAccount() {
             Info('E-mail already registered');
             break;
           };
-          console.log(key)
-          console.log(UserName.value)
         };
         if (Account) {
           Validate.removeEventListener('click', AddAccount);
@@ -156,7 +148,6 @@ function AddAccount() {
           Create.removeEventListener('click', NewAccount);
           Create.addEventListener('click', SignOut, { once: true });
         };
-        console.log(Users);
       } else {
         Info('Invalid username');
       };
@@ -166,14 +157,12 @@ function AddAccount() {
   } else {
     Info('Invalid e-mail');
   };
-  console.log('Try add account');
 };
 
-function Info(text, delay=3000, addFunction=true) {
+function Info(text, delay = 3000, addFunction = true) {
   var Alert = document.createElement("span");
   Alert.textContent = text;
   Alert.id = 'alert';
-  console.log(addFunction)
   Form.after(Alert);
   setTimeout(function () {
     Alert.remove();
@@ -191,8 +180,11 @@ function Normal() {
   Create.textContent = 'Create account';
   Create.addEventListener('click', NewAccount, { once: true });
 
+  Form.reset();
+  
+  Password.type = 'password';
+
   Email.placeholder = 'E-mail or username';
-  Email.value = Password.value = '';
 
   Title.textContent = TitlePage.textContent = 'Login';
 
