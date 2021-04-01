@@ -44,10 +44,6 @@ input {
   text-align: start;
 }
 
-input::placeholder {
-  color: gray;
-}
-
 #input-section p, label, #alert {
   font-size: small;
 }
