@@ -2,6 +2,7 @@ var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
 
+var Header = document.querySelector("header");
 var InputSection = document.querySelector("section");
 var Div = document.querySelector("div");
 var Form = document.querySelector("form");
@@ -39,7 +40,7 @@ function Login() {
   if (Find) {
     Validate.addEventListener('click', Login, { once: true });
 
-    Form.hidden = true;
+    Form.hidden = Header.hidden = true;
 
     InputSection.firstChild.before(LoginSuccessfully);
 
@@ -58,7 +59,7 @@ function SignOut() {
 
   Password.type = 'password';
 
-  Form.hidden = false;
+  Form.hidden = Header.hidden = false;
   Form.reset();
 
   LoginSuccessfully.remove();
@@ -140,7 +141,7 @@ function AddAccount() {
 
           Users[UserName.value.trim()] = [Email.value, Password.value];
 
-          Form.hidden = true;
+          Form.hidden = Header.hidden = true;
 
           InputSection.firstChild.before(LoginSuccessfully);
 
