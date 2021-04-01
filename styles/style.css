@@ -7,6 +7,7 @@
 
 header {
   margin-bottom: 16rem;
+  text-shadow: 12px 12px 10px black;
 }
 
 body {
@@ -15,6 +16,23 @@ body {
 
 .box {
   margin: 0 0 4rem 0;
+}
+
+form, input, label {
+  background: white;
+}
+
+form {
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 4rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 8px 10px 16px black;
+}
+
+input, input::placeholder, label, #input-section p:hover, #validate:hover {
+  color: black;
 }
 
 input {
@@ -26,34 +44,28 @@ input {
   text-align: start;
 }
 
-input::placeholder {
-  color: white;
-}
-
 #input-section p, label, #alert {
   font-size: small;
 }
 
 #input-section p {
+  user-select: none;
   text-decoration: underline;
   margin: auto;
   margin-top: 4rem;
   width: fit-content;
 }
 
-#input-section p:hover {
-  color: black;
+#input-section p:hover, #validate:hover {
   cursor: pointer;
 }
 
 #validate {
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 #validate:hover {
-  cursor: pointer;
   background: white;
-  color: black;
 }
 
 #alert {
@@ -74,15 +86,20 @@ a:hover, a:focus {
     font-size: small;
   }
 
+  form {
+    width: min-content;
+    margin-bottom: 2rem;
+  }
+
+  #e-mail, #password, #username {
+    width: 15rem;
+  }
+
   #input-section h1 {
     font-size: large;
   }
 
   #input-section p {
     margin-top: 2rem;
-  }
-
-  #validate {
-    margin-bottom: 2rem;
   }
 }
