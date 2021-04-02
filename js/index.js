@@ -40,6 +40,8 @@ function Login() {
   if (Find) {
     Validate.addEventListener('click', Login, { once: true });
 
+    TitlePage.textContent = 'Login successfully';
+
     Form.hidden = Header.hidden = true;
 
     InputSection.firstChild.before(LoginSuccessfully);
@@ -58,6 +60,8 @@ function SignOut() {
   Create.textContent = 'Create account';
 
   Password.type = 'password';
+
+  TitlePage.textContent = 'Login';
 
   Form.hidden = Header.hidden = false;
   Form.reset();
@@ -140,6 +144,8 @@ function AddAccount() {
           Validate.addEventListener('click', Login, { once: true });
 
           Users[UserName.value.trim()] = [Email.value, Password.value];
+
+          TitlePage.textContent = 'Login successfully';
 
           Form.hidden = Header.hidden = true;
 
