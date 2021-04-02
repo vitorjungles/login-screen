@@ -8,7 +8,7 @@ This project is a login screen.
 The objective of this project is to improve my skills in HTML, CSS and JavaScript.
 
 ## :question: How does the Login screen work?
-Enter your username, email and password, so your user will already be registered. The system will not accept users who are already registered or e-mails, passwords and invalid user names.
+Enter your username, email and password, so your user will already be registered. The system will not accept users who are already registered or e-mails, passwords and invalid usernames.
 
 ## :computer: What technologies are used?
 This project was done with HTML5, CSS3 and JavaScript.
