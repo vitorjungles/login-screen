@@ -2,7 +2,7 @@
 <h1>Login screen</h1>
 <img src="media/gifs/gif.gif" width="800" height="450">
 
-[What is this project](https://github.com/vitorjungles/login-screen#pushpin-what-is-this-project) | [What is the objective of this project?](https://github.com/vitorjungles/login-screen#thinking-what-is-the-objective-of-this-project) | [How does the Login screen work?](https://github.com/vitorjungles/login-screen#question-how-does-the-login-screen-work) | [What technologies are used?](https://github.com/vitorjungles/login-screen#computer-what-technologies-are-used) | [License](https://github.com/vitorjungles/login-screen#pencil-license)
+[What is this project?](https://github.com/vitorjungles/login-screen#pushpin-what-is-this-project) | [What is the objective of this project?](https://github.com/vitorjungles/login-screen#thinking-what-is-the-objective-of-this-project) | [How does the Login screen work?](https://github.com/vitorjungles/login-screen#question-how-does-the-login-screen-work) | [What technologies are used?](https://github.com/vitorjungles/login-screen#computer-what-technologies-are-used) | [License](https://github.com/vitorjungles/login-screen#pencil-license)
 
 </div>
 
