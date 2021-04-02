@@ -1,10 +1,5 @@
-<div align="center">
-<h1>Login screen</h1>
-<img src="media/gifs/gif.gif" width="800" height="450">
-
-[What is this project?](https://github.com/vitorjungles/login-screen#pushpin-what-is-this-project) | [What is the objective of this project?](https://github.com/vitorjungles/login-screen#thinking-what-is-the-objective-of-this-project) | [How does the Login screen work?](https://github.com/vitorjungles/login-screen#question-how-does-the-login-screen-work) | [What technologies are used?](https://github.com/vitorjungles/login-screen#computer-what-technologies-are-used) | [License](https://github.com/vitorjungles/login-screen#pencil-license) | [How to access the Login screen?](https://github.com/vitorjungles/login-screen#arrow_right-how-to-access-the-login-screen)
-
-</div>
+<h1 align="center">Login screen</h1>
+<p align="center"><img src="media/gifs/gif.gif" width="800" height="450"></p>
 
 ## :pushpin: What is this project?
 This project is a login screen.
