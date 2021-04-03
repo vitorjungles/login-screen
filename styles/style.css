@@ -48,6 +48,10 @@ input {
   font-size: small;
 }
 
+#input-section p, #validate, a {
+  transition: all 0.3s;
+}
+
 #input-section p {
   user-select: none;
   text-decoration: underline;
