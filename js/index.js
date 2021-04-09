@@ -124,18 +124,16 @@ function AddAccount() {
     if (PasswordValidate(Password.value)) {
       if (UserName.value!='' && UserName.value.trim().indexOf(' ') == -1) {
         for (let key in Users) {
+          if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
+            Info('User already registered');
+          } else if (key == UserName.value) {
+            Info('Existing username');
+          } else if (Users[key].indexOf(Email.value) != -1) {
+            Info('E-mail already registered');
+          };
           if ((key == UserName.value && Users[key].indexOf(Email.value) != -1) || key == UserName.value || Users[key].indexOf(Email.value) != -1) {
             Create.removeEventListener('click', Normal);
             Account = false;
-          };
-          if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
-            Info('User already registered');
-            break;
-          } else if (key == UserName.value) {
-            Info('Existing username');
-            break;
-          } else if (Users[key].indexOf(Email.value) != -1) {
-            Info('E-mail already registered');
             break;
           };
         };
