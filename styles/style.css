@@ -1,17 +1,20 @@
 * {
   text-align: center;
-  background: rgb(65, 146, 135);
   color: white;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Balsamiq Sans', cursive;
 }
 
 header {
   margin-bottom: 16rem;
   text-shadow: 12px 12px 10px black;
+  font-size: x-large;
 }
 
 body {
-  min-width: 400px;
+  min-width: auto;
+  background: #b92b27;
+  background: -webkit-linear-gradient(to right, #b92b27, #1565c0);
+  background: linear-gradient(to right, #b92b27, #1565c0);
 }
 
 .box {
@@ -20,6 +23,7 @@ body {
 
 form, input, label {
   background: white;
+  font-size: large;
 }
 
 form {
@@ -44,8 +48,8 @@ input {
   text-align: start;
 }
 
-#input-section p, label, #alert {
-  font-size: small;
+#input-section p, #alert {
+  font-size: large;
 }
 
 #input-section p, #validate, a {
@@ -83,13 +87,13 @@ input {
 }
 
 footer {
-  font-size: x-small;
+  font-size: small;
 }
 
 @media screen and (max-width: 600px) and (max-height: 1000px) {
   header {
-    margin-bottom: 8rem;
-    font-size: small;
+    margin-bottom: 4rem;
+    font-size: medium;
   }
 
   form {
@@ -98,7 +102,7 @@ footer {
   }
 
   #e-mail, #password, #username {
-    width: 15rem;
+    width: 12rem;
   }
 
   #input-section h1 {

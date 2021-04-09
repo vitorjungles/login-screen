@@ -1,6 +1,7 @@
 var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
+document.querySelector("body").hidden = false
 
 var Header = document.querySelector("header");
 var InputSection = document.querySelector("section");
