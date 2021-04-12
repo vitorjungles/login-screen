@@ -192,11 +192,10 @@ function Normal() {
 
   Email.placeholder = 'E-mail or username';
 
-  Title.textContent = TitlePage.textContent = 'Login';
+  Title.textContent = TitlePage.textContent = Validate.value = 'Login';
 
   UserName.remove();
 
-  Validate.value = 'Login';
   Validate.removeEventListener('click', AddAccount);
   Validate.addEventListener('click', Login, { once: true });
 };
