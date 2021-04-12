@@ -1,7 +1,7 @@
 var year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
 document.querySelector("#copyright").after(year);
-document.querySelector("body").hidden = false
+document.querySelector("body").hidden = false;
 
 var Header = document.querySelector("header");
 var InputSection = document.querySelector("section");
@@ -24,7 +24,9 @@ Validate.addEventListener('click', Login, { once: true });
 
 Create.addEventListener('click', NewAccount, { once: true });
 
-ShowPassword.addEventListener('click', function () { Password.type == 'password' ? Password.type = 'text' : Password.type = 'password' });
+ShowPassword.addEventListener('click', function () {
+  Password.type === 'password' ? Password.type = 'text' : Password.type = 'password';
+});
 
 function Login() {
   var Find = false;
@@ -187,7 +189,7 @@ function Normal() {
   Create.addEventListener('click', NewAccount, { once: true });
 
   Form.reset();
-  
+
   Password.type = 'password';
 
   Email.placeholder = 'E-mail or username';
