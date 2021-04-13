@@ -82,11 +82,11 @@ function PasswordValidate(password) {
   if (password.length >= 8) {
     for (let c = 0; c < password.length; c++) {
       if (!isNaN(password[c])) {
-        numbers += 1;
+        numbers++;
       } else if (isNaN(password[c]) && /[A-Za-z]/.exec(password[c]) != null) {
-        letter += 1;
+        letter++;
       } else {
-        special += 1;
+        special++;
       };
     };
   };
@@ -119,13 +119,13 @@ function NewAccount() {
 function AddAccount() {
   var Account = true;
 
-  if (!EmailValidate(Email.value) || !PasswordValidate(Password.value) || !(UserName.value!='' && UserName.value.trim().indexOf(' ') == -1)) {
+  if (!EmailValidate(Email.value) || !PasswordValidate(Password.value) || !(UserName.value != '' && UserName.value.trim().indexOf(' ') == -1)) {
     Create.removeEventListener('click', Normal);
   };
 
   if (EmailValidate(Email.value)) {
     if (PasswordValidate(Password.value)) {
-      if (UserName.value!='' && UserName.value.trim().indexOf(' ') == -1) {
+      if (UserName.value != '' && UserName.value.trim().indexOf(' ') == -1) {
         for (let key in Users) {
           if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
             Info('User already registered');
