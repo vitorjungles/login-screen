@@ -1,75 +1,77 @@
-var year = document.createElement("span");
+let year = document.createElement("span");
 year.textContent = ` ${new Date().getFullYear()}`;
+
 document.querySelector("#copyright").after(year);
 document.querySelector("footer").hidden = false;
 
-var Header = document.querySelector("header");
-var InputSection = document.querySelector("section");
-var Div = document.querySelector("div");
-var Form = document.querySelector("form");
-var P = document.querySelector("p");
-var Title = document.querySelector("h1");
-var TitlePage = document.querySelector("title");
-var Create = document.querySelector("#create");
-var ShowPassword = document.querySelector("#show-password");
-var Validate = document.querySelector("#validate");
-var Email = document.querySelector("#e-mail");
-var Password = document.querySelector("#password");
-var LoginSuccessfully = document.createElement("h1");
-var UserName = '';
-var Users = {};
-LoginSuccessfully.textContent = 'Login successfully';
+let header = document.querySelector("header");
+let inputSection = document.querySelector("section");
+let form = document.querySelector("form");
+let title = document.querySelector("h1");
+let titlePage = document.querySelector("title");
+let create = document.querySelector("#create");
+let showPassword = document.querySelector("#show-password");
+let validate = document.querySelector("#validate");
+let email = document.querySelector("#e-mail");
+let password = document.querySelector("#password");
 
-Validate.addEventListener('click', Login, { once: true });
+let loginSuccessfully = document.createElement("h1");
 
-Create.addEventListener('click', NewAccount, { once: true });
+let userName = '';
+let users = {};
 
-ShowPassword.addEventListener('click', function () {
-  Password.type === 'password' ? Password.type = 'text' : Password.type = 'password';
+loginSuccessfully.textContent = 'Login successfully';
+
+validate.addEventListener('click', Login, { once: true });
+
+create.addEventListener('click', NewAccount, { once: true });
+
+showPassword.addEventListener('click', () => {
+  password.type === 'password' ? password.type = 'text' : password.type = 'password';
 });
 
 function Login() {
-  var Find = false;
+  let find = false;
 
-  for (let key in Users) {
-    if ((key == Email.value && Users[key][1] == Password.value && Email.value.indexOf('@') == -1) || (Users[key].indexOf(Email.value)!=-1 && Users[key][1] == Password.value && Email.value.indexOf('@') != -1)) {
-      Find = true;
+  for (let key in users) {
+    if ((key == email.value && users[key][1] == password.value && email.value.indexOf('@') == -1) || (users[key].indexOf(email.value)!=-1 && users[key][1] == password.value && email.value.indexOf('@') != -1)) {
+      find = true;
       break;
     };
   };
 
-  Create.removeEventListener('click', NewAccount);
+  create.removeEventListener('click', NewAccount);
 
-  if (Find) {
-    Validate.addEventListener('click', Login, { once: true });
+  if (find) {
+    validate.addEventListener('click', Login, { once: true });
 
-    TitlePage.textContent = 'Login successfully';
+    titlePage.textContent = 'Login successfully';
 
-    Form.hidden = Header.hidden = true;
+    form.hidden = header.hidden = true;
 
-    InputSection.firstChild.before(LoginSuccessfully);
+    inputSection.insertAdjacentElement('afterbegin', loginSuccessfully);
 
-    Create.textContent = 'Sign out';
-    Create.addEventListener('click', SignOut, { once: true });
+    create.textContent = 'Sign out';
+    create.addEventListener('click', SignOut, { once: true });
   } else {
     Info('Invalid e-mail, username or password', 3000, false);
   };
 };
 
 function SignOut() {
-  Create.removeEventListener('click', Normal);
-  Create.addEventListener('click', NewAccount, { once: true });
+  create.removeEventListener('click', Normal);
+  create.addEventListener('click', NewAccount, { once: true });
 
-  Create.textContent = 'Create account';
+  create.textContent = 'Create account';
 
-  Password.type = 'password';
+  password.type = 'password';
 
-  TitlePage.textContent = 'Login';
+  titlePage.textContent = 'Login';
 
-  Form.hidden = Header.hidden = false;
-  Form.reset();
+  form.hidden = header.hidden = false;
+  form.reset();
 
-  LoginSuccessfully.remove();
+  loginSuccessfully.remove();
 };
 
 function EmailValidate(email) {
@@ -77,7 +79,7 @@ function EmailValidate(email) {
 };
 
 function PasswordValidate(password) {
-  var numbers = 0, special = 0, letter = 0;
+  let numbers = 0, special = 0, letter = 0;
 
   if (password.length >= 8) {
     for (let c = 0; c < password.length; c++) {
@@ -94,67 +96,67 @@ function PasswordValidate(password) {
 };
 
 function NewAccount() {
-  Create.addEventListener('click', Normal, { once: true });
-  Create.textContent = 'Login';
+  create.addEventListener('click', Normal, { once: true });
+  create.textContent = 'Login';
 
-  Password.type = 'password';
+  password.type = 'password';
 
-  Email.placeholder = 'E-mail';
+  email.placeholder = 'E-mail';
 
-  UserName = Email.cloneNode(true);
-  UserName.type = 'text';
-  UserName.id = 'username';
-  UserName.placeholder = 'Username';
+  userName = email.cloneNode(true);
+  userName.type = 'text';
+  userName.id = 'username';
+  userName.placeholder = 'Username';
 
-  Title.textContent = TitlePage.textContent = 'New Account';
+  title.textContent = titlePage.textContent = 'New Account';
 
-  Form.firstChild.before(UserName);
-  Form.reset();
+  form.insertAdjacentElement('afterbegin', userName);
+  form.reset();
 
-  Validate.value = 'Create';
-  Validate.removeEventListener('click', Login);
-  Validate.addEventListener('click', AddAccount, { once: true });
+  validate.value = 'Create';
+  validate.removeEventListener('click', Login);
+  validate.addEventListener('click', AddAccount, { once: true });
 };
 
 function AddAccount() {
-  var Account = true;
+  let account = true;
 
-  if (!EmailValidate(Email.value) || !PasswordValidate(Password.value) || !(UserName.value != '' && UserName.value.trim().indexOf(' ') == -1)) {
-    Create.removeEventListener('click', Normal);
+  if (!EmailValidate(email.value) || !PasswordValidate(password.value) || !(userName.value != '' && userName.value.trim().indexOf(' ') == -1)) {
+    create.removeEventListener('click', Normal);
   };
 
-  if (EmailValidate(Email.value)) {
-    if (PasswordValidate(Password.value)) {
-      if (UserName.value != '' && UserName.value.trim().indexOf(' ') == -1) {
-        for (let key in Users) {
-          if (key == UserName.value && Users[key].indexOf(Email.value) != -1) {
+  if (EmailValidate(email.value)) {
+    if (PasswordValidate(password.value)) {
+      if (userName.value != '' && userName.value.trim().indexOf(' ') == -1) {
+        for (let key in users) {
+          if (key == userName.value && users[key].indexOf(email.value) != -1) {
             Info('User already registered');
-          } else if (key == UserName.value) {
+          } else if (key == userName.value) {
             Info('Existing username');
-          } else if (Users[key].indexOf(Email.value) != -1) {
+          } else if (users[key].indexOf(email.value) != -1) {
             Info('E-mail already registered');
           };
-          if ((key == UserName.value && Users[key].indexOf(Email.value) != -1) || key == UserName.value || Users[key].indexOf(Email.value) != -1) {
-            Create.removeEventListener('click', Normal);
-            Account = false;
+          if ((key == userName.value && users[key].indexOf(email.value) != -1) || key == userName.value || users[key].indexOf(email.value) != -1) {
+            create.removeEventListener('click', Normal);
+            account = false;
             break;
           };
         };
-        if (Account) {
-          Validate.removeEventListener('click', AddAccount);
-          Validate.addEventListener('click', Login, { once: true });
+        if (account) {
+          validate.removeEventListener('click', AddAccount);
+          validate.addEventListener('click', Login, { once: true });
 
-          Users[UserName.value.trim()] = [Email.value, Password.value];
+          users[userName.value.trim()] = [email.value, password.value];
 
-          TitlePage.textContent = 'Login successfully';
+          titlePage.textContent = 'Login successfully';
 
-          Form.hidden = Header.hidden = true;
+          form.hidden = header.hidden = true;
 
-          InputSection.firstChild.before(LoginSuccessfully);
+          inputSection.insertAdjacentElement('afterbegin', loginSuccessfully);
 
-          Create.textContent = 'Sign out';
-          Create.removeEventListener('click', NewAccount);
-          Create.addEventListener('click', SignOut, { once: true });
+          create.textContent = 'Sign out';
+          create.removeEventListener('click', NewAccount);
+          create.addEventListener('click', SignOut, { once: true });
         };
       } else {
         Info('Invalid username');
@@ -168,36 +170,39 @@ function AddAccount() {
 };
 
 function Info(text, delay = 3000, addFunction = true) {
-  var Alert = document.createElement("span");
-  Alert.textContent = text;
-  Alert.id = 'alert';
-  Form.after(Alert);
-  setTimeout(function () {
-    Alert.remove();
+  let alert = document.createElement("span");
+
+  alert.textContent = text;
+  alert.id = 'alert';
+
+  form.after(alert);
+
+  setTimeout(() => {
+    alert.remove();
     if (addFunction) {
-      Validate.addEventListener('click', AddAccount, { once: true });
-      Create.addEventListener('click', Normal, { once: true });
+      validate.addEventListener('click', AddAccount, { once: true });
+      create.addEventListener('click', Normal, { once: true });
     } else {
-      Validate.addEventListener('click', Login, { once: true });
-      Create.addEventListener('click', NewAccount, { once: true });
+      validate.addEventListener('click', Login, { once: true });
+      create.addEventListener('click', NewAccount, { once: true });
     };
   }, delay);
 };
 
 function Normal() {
-  Create.textContent = 'Create account';
-  Create.addEventListener('click', NewAccount, { once: true });
+  create.textContent = 'Create account';
+  create.addEventListener('click', NewAccount, { once: true });
 
-  Form.reset();
+  form.reset();
 
-  Password.type = 'password';
+  password.type = 'password';
 
-  Email.placeholder = 'E-mail or username';
+  email.placeholder = 'E-mail or username';
 
-  Title.textContent = TitlePage.textContent = Validate.value = 'Login';
+  title.textContent = titlePage.textContent = validate.value = 'Login';
 
-  UserName.remove();
+  userName.remove();
 
-  Validate.removeEventListener('click', AddAccount);
-  Validate.addEventListener('click', Login, { once: true });
+  validate.removeEventListener('click', AddAccount);
+  validate.addEventListener('click', Login, { once: true });
 };
