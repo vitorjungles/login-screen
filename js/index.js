@@ -22,15 +22,15 @@ let users = {};
 
 loginSuccessfully.textContent = 'Login successfully';
 
-validate.addEventListener('click', Login, { once: true });
+validate.addEventListener('click', login, { once: true });
 
-create.addEventListener('click', NewAccount, { once: true });
+create.addEventListener('click', newAccount, { once: true });
 
 showPassword.addEventListener('click', () => {
   password.type === 'password' ? password.type = 'text' : password.type = 'password';
 });
 
-function Login() {
+function login() {
   let find = false;
 
   for (let key in users) {
@@ -40,10 +40,10 @@ function Login() {
     };
   };
 
-  create.removeEventListener('click', NewAccount);
+  create.removeEventListener('click', newAccount);
 
   if (find) {
-    validate.addEventListener('click', Login, { once: true });
+    validate.addEventListener('click', login, { once: true });
 
     titlePage.textContent = 'Login successfully';
 
@@ -52,15 +52,15 @@ function Login() {
     inputSection.insertAdjacentElement('afterbegin', loginSuccessfully);
 
     create.textContent = 'Sign out';
-    create.addEventListener('click', SignOut, { once: true });
+    create.addEventListener('click', signOut, { once: true });
   } else {
-    Info('Invalid e-mail, username or password', 3000, false);
+    info('Invalid e-mail, username or password', 3000, false);
   };
 };
 
-function SignOut() {
-  create.removeEventListener('click', Normal);
-  create.addEventListener('click', NewAccount, { once: true });
+function signOut() {
+  create.removeEventListener('click', normal);
+  create.addEventListener('click', newAccount, { once: true });
 
   create.textContent = 'Create account';
 
@@ -74,11 +74,11 @@ function SignOut() {
   loginSuccessfully.remove();
 };
 
-function EmailValidate(email) {
+function emailValidate(email) {
   return email.split('@').length != 1 && email.split('@')[email.split('@').length - 1].indexOf('.') != -1 && email.split('@')[email.split('@').length - 1].split('.')[0] != '' && email.indexOf(' ') == -1 ? true : false;
 };
 
-function PasswordValidate(password) {
+function passwordValidate(password) {
   let numbers = 0, special = 0, letter = 0;
 
   if (password.length >= 8) {
@@ -95,8 +95,8 @@ function PasswordValidate(password) {
   return letter >= 1 && numbers >= 1 && special >= 1 ? true : false;
 };
 
-function NewAccount() {
-  create.addEventListener('click', Normal, { once: true });
+function newAccount() {
+  create.addEventListener('click', normal, { once: true });
   create.textContent = 'Login';
 
   password.type = 'password';
@@ -114,37 +114,37 @@ function NewAccount() {
   form.reset();
 
   validate.value = 'Create';
-  validate.removeEventListener('click', Login);
-  validate.addEventListener('click', AddAccount, { once: true });
+  validate.removeEventListener('click', login);
+  validate.addEventListener('click', addAccount, { once: true });
 };
 
-function AddAccount() {
+function addAccount() {
   let account = true;
 
-  if (!EmailValidate(email.value) || !PasswordValidate(password.value) || !(userName.value != '' && userName.value.trim().indexOf(' ') == -1)) {
-    create.removeEventListener('click', Normal);
+  if (!emailValidate(email.value) || !passwordValidate(password.value) || !(userName.value != '' && userName.value.trim().indexOf(' ') == -1)) {
+    create.removeEventListener('click', normal);
   };
 
-  if (EmailValidate(email.value)) {
-    if (PasswordValidate(password.value)) {
+  if (emailValidate(email.value)) {
+    if (passwordValidate(password.value)) {
       if (userName.value != '' && userName.value.trim().indexOf(' ') == -1) {
         for (let key in users) {
           if (key == userName.value && users[key].indexOf(email.value) != -1) {
-            Info('User already registered');
+            info('User already registered');
           } else if (key == userName.value) {
-            Info('Existing username');
+            info('Existing username');
           } else if (users[key].indexOf(email.value) != -1) {
-            Info('E-mail already registered');
+            info('E-mail already registered');
           };
           if ((key == userName.value && users[key].indexOf(email.value) != -1) || key == userName.value || users[key].indexOf(email.value) != -1) {
-            create.removeEventListener('click', Normal);
+            create.removeEventListener('click', normal);
             account = false;
             break;
           };
         };
         if (account) {
-          validate.removeEventListener('click', AddAccount);
-          validate.addEventListener('click', Login, { once: true });
+          validate.removeEventListener('click', addAccount);
+          validate.addEventListener('click', login, { once: true });
 
           users[userName.value.trim()] = [email.value, password.value];
 
@@ -155,21 +155,21 @@ function AddAccount() {
           inputSection.insertAdjacentElement('afterbegin', loginSuccessfully);
 
           create.textContent = 'Sign out';
-          create.removeEventListener('click', NewAccount);
-          create.addEventListener('click', SignOut, { once: true });
+          create.removeEventListener('click', newAccount);
+          create.addEventListener('click', signOut, { once: true });
         };
       } else {
-        Info('Invalid username');
+        info('Invalid username');
       };
     } else {
-      Info('Invalid password, must contain 8 characters, special characters, letters and numbers', 5000);
+      info('Invalid password, must contain 8 characters, special characters, letters and numbers', 5000);
     };
   } else {
-    Info('Invalid e-mail');
+    info('Invalid e-mail');
   };
 };
 
-function Info(text, delay = 3000, addFunction = true) {
+function info(text, delay = 3000, addFunction = true) {
   let alert = document.createElement("span");
 
   alert.textContent = text;
@@ -180,18 +180,18 @@ function Info(text, delay = 3000, addFunction = true) {
   setTimeout(() => {
     alert.remove();
     if (addFunction) {
-      validate.addEventListener('click', AddAccount, { once: true });
-      create.addEventListener('click', Normal, { once: true });
+      validate.addEventListener('click', addAccount, { once: true });
+      create.addEventListener('click', normal, { once: true });
     } else {
-      validate.addEventListener('click', Login, { once: true });
-      create.addEventListener('click', NewAccount, { once: true });
+      validate.addEventListener('click', login, { once: true });
+      create.addEventListener('click', newAccount, { once: true });
     };
   }, delay);
 };
 
-function Normal() {
+function normal() {
   create.textContent = 'Create account';
-  create.addEventListener('click', NewAccount, { once: true });
+  create.addEventListener('click', newAccount, { once: true });
 
   form.reset();
 
@@ -203,6 +203,6 @@ function Normal() {
 
   userName.remove();
 
-  validate.removeEventListener('click', AddAccount);
-  validate.addEventListener('click', Login, { once: true });
+  validate.removeEventListener('click', addAccount);
+  validate.addEventListener('click', login, { once: true });
 };
