@@ -18,14 +18,15 @@
     <section id="input-section">
       <div class="box">
         <form>
+          <label for="e-mail" hidden>E-mail or username</label>
           <input type="email" id="e-mail" placeholder="E-mail or username" spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="username">
-          <br>
+          <label for="password" hidden>Password</label>
           <input type="password" id="password" placeholder="Password" spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="current-password">
-          <br>
           <div class="show-password-area">
             <input type="checkbox" id="show-password">
             <label id="show-password-label" for="show-password">Show password</label>
           </div>
+          <label for="validate" hidden>Login</label>
           <input type="button" id="validate" value="Login">
         </form>
         <p id="create">Create account</p>
@@ -33,7 +34,9 @@
     </section>
   </main>
   <footer hidden>
-    <span id="copyright">&copy;</span> - Made by <a href="https://github.com/vitorjungles">Vítor Jungles</a>
+    <div class="footer-container">
+      <span id="copyright">&copy;</span> - Made by <a href="https://github.com/vitorjungles">Vítor Jungles</a>
+    </div>
   </footer>
   <script src="js/index.js"></script>
 </body>
